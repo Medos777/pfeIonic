@@ -1,9 +1,69 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>ListCollecte</ion-title>
+  
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+      719 Café
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row >
+      <ion-col>
+        <ion-card>
+          <ion-card-content class="ion-no-padding">
+            <ion-row>
+              <ion-col class="ion-padding">
+      </ion-col>
+            
+              <ion-col class="ion-padding">
+                <ion-row>
+                  <ion-col>
+                    <span class="font-14 text-bold"> item.libelle</span>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <span>
+                      item.stock
+                    </span>
+                    
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-row>
+                    <ion-col>
+                      <span class="font-16 before-digit">
+                        formatNumberBeforeDigit(item.pv),
+                      </span>
+                      <span class="font-10 after-digit">
+                        formatNumberAfterDigit(item.pv) DT
+                      </span>
+                    </ion-col>
+                  </ion-row>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-button color="success">
+                      <ion-icon slot="start" name="cart">                       +
+                      </ion-icon>
+                      +
+                    </ion-button>
+                  </ion-col>
+                  <ion-col>
+                    <ion-button color="warning">
+                      <ion-icon slot="start" name="cart"></ion-icon>
+                      -
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
 
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -5,8 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <h1 class="dislay-4">Collecte </h1>
-  <hr>
+ 
   <form [formGroup]="this.formData"  (ngSubmit)="onSubmit()">
     <ion-input type="hidden" class="form-control" formControlName="id" id="id"></ion-input>
       <ion-input type="hidden" class="form-control" formControlName="libart" id="libart"></ion-input>
@@ -23,12 +22,12 @@
          [class.is-invalid]="!isValid && formData.value.designation==0"></ion-input>
   </div>
       <div class="form-group">
-          <label>Emballage </label>
+          <ion-label>Emballage </ion-label>
           <select  class="form-control" formControlName="codeart" id="codeart" 
-           (change)="selectPrice($event.target)">
+           (change)="selectPrice($event.target)" placeholder="Select One">
               <option value="0">-Select-</option>
-              <option *ngFor="let item of articleList" value="{{item.code}}">{{item.libelle}}</option>
-         </select>
+              <option  *ngFor="let item of articleList" value="{{item.code}}">{{item.libelle}}</option>
+          </select>
       </div>
     
   

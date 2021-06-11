@@ -20,7 +20,7 @@ const routes: Routes = [
     loadChildren: () => import('./Collecte/lcollecte/lcollecte.module').then( m => m.LcollectePageModule)
   },
   {
-    path: 'list-collecte',
+    path: 'collectes',
     loadChildren: () => import('./Collecte/list-collecte/list-collecte.module').then( m => m.ListCollectePageModule)
   },
   {
