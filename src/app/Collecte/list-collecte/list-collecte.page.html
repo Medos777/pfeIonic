@@ -1,69 +1,56 @@
-  
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-title>
-      719 Café
-    </ion-title>
+liste des collectes     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid class="ion-no-padding">
-    <ion-row >
-      <ion-col>
-        <ion-card>
-          <ion-card-content class="ion-no-padding">
-            <ion-row>
-              <ion-col class="ion-padding">
-      </ion-col>
-            
-              <ion-col class="ion-padding">
-                <ion-row>
-                  <ion-col>
-                    <span class="font-14 text-bold"> item.libelle</span>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col>
-                    <span>
-                      item.stock
-                    </span>
-                    
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-row>
-                    <ion-col>
-                      <span class="font-16 before-digit">
-                        formatNumberBeforeDigit(item.pv),
-                      </span>
-                      <span class="font-10 after-digit">
-                        formatNumberAfterDigit(item.pv) DT
-                      </span>
-                    </ion-col>
-                  </ion-row>
-                </ion-row>
-                <ion-row>
-                  <ion-col>
-                    <ion-button color="success">
-                      <ion-icon slot="start" name="cart">                       +
-                      </ion-icon>
-                      +
-                    </ion-button>
-                  </ion-col>
-                  <ion-col>
-                    <ion-button color="warning">
-                      <ion-icon slot="start" name="cart"></ion-icon>
-                      -
-                    </ion-button>
-                  </ion-col>
-                </ion-row>
+<ion-input type="text" [(ngModel)]="SearchText" class="form-control bg-light border-0 small"
+(keyup)="searchByLib()"
+placeholder="Recherche..." aria-label="Search" aria-describedby="basic-addon2"></ion-input>
 
-              </ion-col>
-            </ion-row>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<table class="table table-hover">
+<thead class="thead-light">
+
+<th>numero</th>  
+<th>libelle</th>  
+
+<th>Date Collecte</th>
+
+
+<th>Total TTC</th>
+<th>
+<ion-button class="btn btn-outline-success"  *ngIf="this.role=='agent'" (click)="newCollecte()"><i class="fa fa-plus-square"></i>
+ Create New</ion-button>
+</th>
+</thead>
+<tbody>
+<tr *ngFor="let col of list">
+<td class = "hidden">{{col.id}}</td>
+<td>{{col.numero}}</td>
+<td>{{col.libelle}}</td>
+
+<td>{{col.date_mvt| date:'dd/MM/yyyy'}}</td>
+
+<td>{{col.libclient}}</td>
+
+<td >{{(col.totttc).toFixed(2)}}</td>
+<td>
+  <ion-button class="btn text-warning" *ngIf="this.role=='agent'" (click)="onSelect(col)"><i class="fa fa-pencil fa-lg">
+
+  </i> </ion-button>
+<a class="btn text-danger"  *ngIf="this.role=='agent'" (click)="onDelete(col.id)"><i class="fa fa-trash-o">
+
+</i> </a>
+
+</td>
+</tr>
+<div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="dataTable_info" 
+role="status" aria-live="polite"></div></div><div class="col-sm-12 col-md-7">
+<div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+  <ul class="pagination"></ul></div></div></div>
+</tbody>
+</table>
+
 </ion-content>
