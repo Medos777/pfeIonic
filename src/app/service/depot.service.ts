@@ -15,7 +15,9 @@ export class DepotService {
   public dataForm:  FormGroup; 
   constructor(private http: HttpClient) { }
  
- 
+  getDataByCodeb(codeb: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/codeb/${codeb}`);
+  }
   getData(id: number): Observable<Object> {
     return this.http.get(`${this.baseUrl}/id/${id}`);
   }

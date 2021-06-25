@@ -19,7 +19,7 @@ export class AuthentificationService {
   login(username:string,password:string):Observable<any>
   {
 
-    console.log(username,password);
+    //console.log(username,password);
    return this.http.post(`${this.baseUrl}/login`,{username,password},httpOptions);
   }
 

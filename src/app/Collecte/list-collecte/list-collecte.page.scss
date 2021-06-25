@@ -1,0 +1,25 @@
+img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80%;
+    margin: auto;
+  }
+  .before-digit {
+    vertical-align: top;
+  }
+  .after-digit {
+    vertical-align: super;
+    margin-left: -4px;
+  }
+  .col-stock-red {
+    border-width: 1px 0px 1px 1px;
+    border-style: solid;
+    border-color: red;
+  }
+  
+  .col-stock-red-last {
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: red;
+  }

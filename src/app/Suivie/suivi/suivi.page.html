@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>suivi votre courrier</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div></div>
+<div></div>
+<div></div>
+  <ion-label > taper le Code a barre</ion-label>
+  <ion-input type="text" placeholder="taper le Code a barre" (focusout)="onCodebarre($event.target)"></ion-input>
+
+
+
+      <div *ngIf="appear">
+    
+          <ion-label>Etat</ion-label>
+
+          <ion-input>{{etat}}</ion-input>
+</div>
+        
+    </ion-content>

@@ -37,14 +37,13 @@ export class LoginPage implements OnInit {
     return this.LoginForm.controls; }
 
   onSubmit() {
-    console.log(this.LoginForm);
     this.submitted = true;
     this.msgerreur = "";
 
 
     
   if (this.LoginForm.invalid) {
-        return console.log("errorform")   }
+          }
      
 this.authentification.login(this.f.username.value,this.f.password.value).subscribe(
   data=>{
@@ -55,15 +54,13 @@ this.authentification.login(this.f.username.value,this.f.password.value).subscri
     this.role=this.tokenservice.getUser().role;    
   
     this.authentification.loginc=true;
-    if(this.role=='admin')
-    this.router.navigate(['addcollecte']);
-    else if (this.role=='agent')
-    this.router.navigate(['addcollecte']);
+    if(this.role=='client')
+    this.router.navigate(['suivi']);
+    
 
     
     else if  (this.role=='facteur')
     this.router.navigate(['addcollecte']);
-    else this.router.navigate(['addcollecte']);
 
 
     

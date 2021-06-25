@@ -14,6 +14,9 @@ import { TarifService } from 'src/app/service/tarif.service';
 import { UserService } from 'src/app/service/user.service';
 import { VoitureService } from 'src/app/service/voiture.service';
 import { LcollectePage } from '../lcollecte/lcollecte.page';
+import { User } from 'src/app/model/user';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
+import { AuthentificationService } from 'src/app/service/authentification.service';
 
 @Component({
   selector: 'app-add-collecte',
@@ -23,8 +26,8 @@ import { LcollectePage } from '../lcollecte/lcollecte.page';
 export class AddCollectePage implements OnInit {
   numligne:number=1;
 
-
-  ClientList: any[];
+user: any;
+  FacteurList: any[];
   destinationList:any[];
   VoituresList: any[];
   ChauffeursList:any[];
@@ -48,14 +51,17 @@ export class AddCollectePage implements OnInit {
 
     private voitureService :VoitureService,
     private chauffeurService :ChauffeurService,
-
-
+    private AuthentificationService : AuthentificationService,
+    private tokenService: TokenStorageService,
     private router :Router,
     private currentRoute: ActivatedRoute,
     private datePipe : DatePipe) { }
     get f() { return this.service.formData.controls }
 
     ngOnInit() {
+
+      this.user=this.tokenService.getUser();
+
 
       if (this.service.choixmenu == 1){
        this.InfoForm();
@@ -76,8 +82,8 @@ export class AddCollectePage implements OnInit {
         this.f['date_mvt'].setValue(this.service.formData.value.date_mvt);
        }
    
-   this.userService.listUserByRole('client').subscribe(
-     response =>{this.ClientList = response;}
+   this.userService.listUserByRole('facteur').subscribe(
+     response =>{this.FacteurList = response;}
     );
     this.destinationService.getAll().subscribe(
       response =>{this.destinationList = response;
@@ -102,7 +108,15 @@ export class AddCollectePage implements OnInit {
    
    
      
-   
+     public logout() {
+      this.tokenService.signOut();
+      this.AuthentificationService.logout();
+      this.AuthentificationService.loginc = false;
+      this.AuthentificationService.connected=false;
+      this.router.navigate(['login']);
+  
+      
+    }  
      showToastMsg() {
       this.toastCtrl.create({
         message: 'Tiny Toast!',
@@ -121,8 +135,7 @@ export class AddCollectePage implements OnInit {
          numero : 0,
          libelle:'',
          date_mvt : '',
-         idclient : 0,
-         libclient : '',
+         codefacteur : '',
          totht : 0,
          tottva : 0,
          typecorr:'',
@@ -216,6 +229,7 @@ onSelectCompteur(annee: number)
   );  
 } 
    onSubmit(){
+    this.f['codefacteur'].setValue(this.user.id);
 
        this.f['lcollectes'].setValue(this.service.list);
        console.log(this.service.formData.value);
@@ -263,15 +277,5 @@ onSelectCompteur(annee: number)
          }
         
       }
-   OnSelectClient(ctrl)
-      {
-         if(ctrl.selectedIndex == 0){
-          this.f['libclient'].setValue('');
-          this.f['idclient'].setValue('');
-         }
-         else{
-            this.f['libclient'].setValue(this.ClientList[ctrl.selectedIndex - 1].nom);
-            this.f['idclient'].setValue(this.ClientList[ctrl.selectedIndex - 1].id);
-         }
-       }
+  
       }

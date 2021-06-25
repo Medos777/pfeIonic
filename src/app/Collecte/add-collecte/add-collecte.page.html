@@ -1,26 +1,33 @@
 
-<ion-header [translucent]="true">
+<ion-header [translucent]="true"  >
   <ion-toolbar color="primary">
     <ion-title>
       Gestion de Collecte
     </ion-title>
+    <ion-button class="btn btn-sm btn-success text-white" (click)="logout()">
+      Logoutt </ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content  >
 <form [formGroup]="this.service.formData" (ngSubmit)="onSubmit()">
-<ion-input  type="hidden"  class="form-control" formControlName="libclient" id="libclient" ></ion-input>
 <div class="form-group row col-md-12">
   <div class="form-group col-md-6">
-      <ion-label><strong>Num Collecte : </strong></ion-label>
+    <ion-item>
+
+      <ion-label position="floating"><strong>Num Collecte : </strong></ion-label>
       <ion-input  type="text"  class="form-control" formControlName="numero" id="numero" readonly></ion-input>
+    </ion-item>
+
   </div>  
-  <div class="form-group col-md-6">
-    <ion-label><strong>Libelle</strong></ion-label>
-    <input  type="text"  class="form-control" formControlName="libelle" id="libelle" >
-  </div> 
+    <ion-item>
+    <ion-label position="floating">Libelle</ion-label>
+    <ion-input  type="text"  class="form-control" formControlName="libelle" id="libelle" ></ion-input>
+    </ion-item>
+
+  
   <div class="form-group col-md-6" >
-    <ion-label><strong>Type Courrier</strong></ion-label>
+    <ion-label position="floating"><strong>Type Courrier</strong></ion-label>
     <ion-select class="form-control" formControlName="typecorr" id="typecorr" >
         <ion-select-option value="Lettre">Lettre</ion-select-option>
         <ion-select-option value="Colis">Colis</ion-select-option>
@@ -33,31 +40,32 @@
 </div>
   
   <div class="col-md-6 form-group">
-        <label><strong>Date</strong></label>
+    <ion-item>
+
+        <label position="floating"><strong>Date</strong></label>
       <input  type="date"  class="form-control" formControlName="date_mvt"  id="date_mvt">
+    </ion-item>
+
   </div>
   <div class="col-md-6 form-group">
-    <ion-label><strong>Destination</strong></ion-label>
+    <ion-label position="floating"><strong>Destination</strong></ion-label>
     <ion-select class="form-control" formControlName="destinationId" id="destinationId" 
     (change)="OnSelectDest($event.target)" placeholder="Select One">
     <ion-select-option value="0">-Select-</ion-select-option>
     <ion-select-option *ngFor="let destination of this.destinationList" value="{{destination.id}}">{{destination.libelle}}</ion-select-option>
     </ion-select>
   </div>
-  <div class="col-md-6 form-group">
-    <label><strong>Client</strong></label>
-    <ion-select class="form-control" formControlName="idclient" id="idclient" 
-    (change)="OnSelectClient($event.target)" placeholder="Select One">
-    <ion-select-option value="0">-Select-</ion-select-option>
-    <ion-select-option *ngFor="let client of this.ClientList" value="{{client.id}}">{{client.nom}}</ion-select-option>
-    </ion-select>
-  </div>
+  
   <div class="form-group col-md-6">
-    <ion-label><strong>Destinataire  </strong></ion-label>
-    <ion-input  type="text"  class="form-control" formControlName="beneficier" id="beneficier" ></ion-input>
+    
+    <ion-label ><strong>Code Facteur </strong></ion-label>
+<!-- <ion-input  type="text"  class="form-control" formControlName="codefacteur" id="codefacteur" value="{{this.user.username}" readonly>{{this.user.usernames}}</ion-input>  -->
+    
+
+
 </div>  
 <div class="col-md-6 form-group">
-  <ion-label><strong>Voiture</strong></ion-label>
+  <ion-label position="floating"><strong>Voiture</strong></ion-label>
   <ion-select class="form-control" formControlName="codevoiture" id="codevoiture" 
   (change)="OnSelectVoit($event.target)" placeholder="Select One">
   <ion-select-option value="0">-Select-</ion-select-option>
@@ -65,7 +73,9 @@
   </ion-select>
 </div>
 <div class="col-md-6 form-group">
-  <label><strong>Chauffeur</strong></label>
+  
+
+  <label position="floating"><strong>Chauffeur</strong></label>
   <ion-select class="form-control" formControlName="codechauff" id="codechauff" 
   (change)="OnSelectChauff($event.target)">
   <ion-select-option value="0">-Select-</ion-select-option>
@@ -111,21 +121,33 @@
   <div class="form-group row">
         <div class="col-sm-4 mb-3 mb-sm-0">
         <div class="form-group">
-            <ion-label>Total Ht : </ion-label>
+          <ion-item>
+
+            <ion-label position="floating">Total Ht : </ion-label>
             <ion-input type="text" class="form-control" id="totht" formControlName="totht" readonly></ion-input>
-        </div>
+          </ion-item>
+
+          </div>
         </div> 
         <div class="col-sm-4 mb-3 mb-sm-0">
         <div class="form-group">
+          <ion-item>
+
             <ion-label>Total Tva  : </ion-label>
             <ion-input type="text" class="form-control" id="tottva" formControlName="tottva" readonly></ion-input>
-        </div>
+          </ion-item>
+
+          </div>
         </div>
         <div class="col-sm-4 mb-3 mb-sm-0">
         <div class="form-group">
-        <ion-label>Total TTC : </ion-label>
+          <ion-item>
+
+        <ion-label position="floating">Total TTC : </ion-label>
         <ion-input type="text" class="form-control" id="totttc" formControlName="totttc" readonly></ion-input>
-        </div>
+          </ion-item>
+
+      </div>
         </div>        
      </div>
   <div class="form-group">

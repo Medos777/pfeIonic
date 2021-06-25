@@ -1,56 +1,55 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true"  *ngIf="this.role=='facteur'">
   <ion-toolbar color="primary">
     <ion-title>
-liste des collectes     </ion-title>
+      Gestion des Collectes
+    </ion-title>
+    <ion-button  size="small " color="warning"  *ngIf="this.role=='agent'" (click)="logout()"> <ion-icon name="trash-outline"></ion-icon></ion-button>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-<ion-input type="text" [(ngModel)]="SearchText" class="form-control bg-light border-0 small"
+<ion-content  *ngIf="this.role=='facteur'"  > 
+  <input type="text" [(ngModel)]="SearchText" class="form-control bg-light border-0 small"
 (keyup)="searchByLib()"
-placeholder="Recherche..." aria-label="Search" aria-describedby="basic-addon2"></ion-input>
+placeholder="Recherche..." aria-label="Search" aria-describedby="basic-addon2">
+  <ion-grid>
+    <ion-row >
+      <ion-col>
+        numero
+      </ion-col>
+      <ion-col>
+        libelle
+      </ion-col>
+      <ion-col>
+        Date Collecte
+      </ion-col>
+      <ion-col>
+        Total TTC
+      </ion-col>
+      <ion-col>
+        Actions
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let col of list" >
+      <ion-col>
+        {{col.numero}}
+      </ion-col>
+      <ion-col>
+        {{col.libelle}}
+      </ion-col>
+      <ion-col>
+        {{col.date_mvt| date:'dd/MM/yyyy'}}
+            </ion-col>
+      <ion-col>
+{{(col.totttc).toFixed(2)}}
+      </ion-col>
+      <ion-col> <ion-button  size="small"  color="success" *ngIf="this.role=='facteur'" (click)="onSelect(col)">
+        <ion-icon name="pencil-outline"></ion-icon>
+      </ion-button>
+      
+    <ion-button  size="small " color="warning"  *ngIf="this.role=='facteur'" (click)="onDelete(col.id)"> <ion-icon name="trash-outline"></ion-icon></ion-button>
+    </ion-col>
+</ion-row>
 
-<table class="table table-hover">
-<thead class="thead-light">
-
-<th>numero</th>  
-<th>libelle</th>  
-
-<th>Date Collecte</th>
-
-
-<th>Total TTC</th>
-<th>
-<ion-button class="btn btn-outline-success"  *ngIf="this.role=='agent'" (click)="newCollecte()"><i class="fa fa-plus-square"></i>
- Create New</ion-button>
-</th>
-</thead>
-<tbody>
-<tr *ngFor="let col of list">
-<td class = "hidden">{{col.id}}</td>
-<td>{{col.numero}}</td>
-<td>{{col.libelle}}</td>
-
-<td>{{col.date_mvt| date:'dd/MM/yyyy'}}</td>
-
-<td>{{col.libclient}}</td>
-
-<td >{{(col.totttc).toFixed(2)}}</td>
-<td>
-  <ion-button class="btn text-warning" *ngIf="this.role=='agent'" (click)="onSelect(col)"><i class="fa fa-pencil fa-lg">
-
-  </i> </ion-button>
-<a class="btn text-danger"  *ngIf="this.role=='agent'" (click)="onDelete(col.id)"><i class="fa fa-trash-o">
-
-</i> </a>
-
-</td>
-</tr>
-<div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="dataTable_info" 
-role="status" aria-live="polite"></div></div><div class="col-sm-12 col-md-7">
-<div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-  <ul class="pagination"></ul></div></div></div>
-</tbody>
-</table>
-
+  </ion-grid>
 </ion-content>
